@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button_menu_container">
+        <item name="android:background">@color/black</item>
+        <item name="android:layout_width">409dp</item>
+        <item name="android:layout_height">513dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+    <style name="bottom_menu_buttons">
+        <item name="android:background">@drawable/round_button_circular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+
+</resources>
