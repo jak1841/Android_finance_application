@@ -10,5 +10,10 @@
     <string name="home_button_label">Home</string>
     <string name="history_button_label">History</string>
     <string name="insights_button_label">Insights</string>
+    <string name="todo">TODO</string>
+    <string name="home_screen_top_bar">Home</string>
+    <string name="history_screen_top_bar">History</string>
+    <string name="insight_screen_top_bar">Insights</string>
+
 
 </resources>

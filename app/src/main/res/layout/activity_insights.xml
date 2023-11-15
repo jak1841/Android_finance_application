@@ -23,7 +23,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/home_screen_top_bar"
+                android:text="@string/insight_screen_top_bar"
                 style="@style/home_title_textView"
                 tools:ignore="TextContrastCheck" />
         </LinearLayout>
@@ -44,7 +44,7 @@
             >
 
             <ImageButton
-                android:id="@+id/insights_button"
+                android:id="@+id/imageButton1"
                 style="@style/bottom_menu_buttons"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -57,7 +57,7 @@
 
 
             <ImageButton
-                android:id="@+id/home_button"
+                android:id="@+id/imageButton0"
                 style="@style/bottom_menu_buttons"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
