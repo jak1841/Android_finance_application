@@ -70,7 +70,7 @@
 
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/history_button"
                 style="@style/bottom_menu_buttons"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
