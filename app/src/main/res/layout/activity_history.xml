@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/history_screen_top_bar"
+                android:textColor="#000000"
                 style="@style/home_title_textView"
                 tools:ignore="TextContrastCheck" />
         </LinearLayout>
@@ -33,7 +34,15 @@
             android:layout_width="match_parent"
             android:layout_height="480dp"
             android:orientation="vertical"
-            android:background="#9ac0cd"></LinearLayout>
+            android:background="#9ac0cd">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/bottom_menu_container"
