@@ -1,5 +1,6 @@
 package com.example.financeapplication
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -25,26 +26,13 @@ import androidx.compose.ui.unit.sp
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             MyApp()
         }
-
-
-
     }
 
-    private fun initButtonListeners() {
-        val insightsButton:ImageButton = findViewById(R.id.insights_button)
-        val homeButton:ImageButton = findViewById(R.id.home_button)
-        val historyButton: ImageButton = findViewById(R.id.history_button)
-
-        insightsButton.setOnClickListener(Change_activities_listener(InsightsActivity::class.java))
-        homeButton.setOnClickListener(Change_activities_listener(HomeActivity::class.java))
-        historyButton.setOnClickListener(Change_activities_listener(HistoryActivity::class.java))
 
 
-    }
 
 
     @Composable
@@ -95,8 +83,80 @@ class HomeActivity : AppCompatActivity() {
                 .background(
                     color = Color(0xFF9ac0cd)
                 ),
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            addDailyLimitButton()
+            addExpenseButton()
+            addIncomeButton()
+        }
+    }
 
+    @Composable
+    fun addExpenseButton () {
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .padding(16.dp)
+                .width(300.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(0xFF90EE90)
+            )
+
+        ) {
+            Text(
+                text = "Add Expense",
+                style = TextStyle(
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                ),
+            )
+        }
+
+    }
+
+    @Composable
+    fun addIncomeButton () {
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .padding(16.dp)
+                .width(300.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(0xFF90EE90)
+            )
+
+        ) {
+            Text(
+                text = "Add Income",
+                style = TextStyle(
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                ),
+            )
+        }
+
+    }
+
+    @Composable
+    fun addDailyLimitButton () {
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .padding(16.dp)
+                .width(300.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(0xFF90EE90)
+            )
+
+        ) {
+            Text(
+                text = "Daily Limit",
+                style = TextStyle(
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                ),
+            )
         }
     }
 
@@ -120,9 +180,9 @@ class HomeActivity : AppCompatActivity() {
             horizontalArrangement = Arrangement.SpaceEvenly,
 
         ) {
-            bottomButton(graphIcon)
-            bottomButton(homeImage)
-            bottomButton(historyImage)
+            bottomButton(graphIcon, Change_activities_listener(InsightsActivity::class.java))
+            bottomButton(homeImage, Change_activities_listener(HomeActivity::class.java))
+            bottomButton(historyImage, Change_activities_listener(HistoryActivity::class.java))
 
 
 
@@ -131,7 +191,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     @Composable
-    fun bottomButton (image:Painter) {
+    fun bottomButton (image:Painter, listener: Change_activities_listener) {
 
         Surface (
             modifier = Modifier
@@ -140,7 +200,7 @@ class HomeActivity : AppCompatActivity() {
             color = Color.Transparent
         ) {
             IconButton(
-                onClick = { /* Handle button click */ },
+                onClick = {listener.click(this)},
                 modifier = Modifier
                     .background(
                         color = Color(0xFF9ac0cd )
@@ -155,6 +215,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 
