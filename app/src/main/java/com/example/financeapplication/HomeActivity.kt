@@ -1,42 +1,86 @@
 package com.example.financeapplication
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import kotlinx.coroutines.*
+import java.time.LocalDate
+import java.util.*
 
 
 class HomeActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+
+
         setContent {
             MyApp()
         }
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                initDatabase()
+            }
+
+
+
+        }
     }
 
+    // Class will get the home states of the current activity
+    class HomeStates {
+        var addIncomePopUp by mutableStateOf(true)
+    }
 
+    val HomeState = HomeStates()
+
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun initDatabase() {
+        val database = FinanceDataBaseBuilder.getInstance(this)
+        val lol = database.financeUserDao()
+        for ( item in lol.getAllUsers()) {
+            println(item.category + " " + (item.amount) + " " + item.date)
+        }
+
+
+    }
 
 
 
     @Composable
     fun MyApp() {
+
+
         // Compose UI hierarchy
         Column (
             modifier = Modifier
@@ -86,9 +130,13 @@ class HomeActivity : AppCompatActivity() {
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            addDailyLimitButton()
-            addExpenseButton()
-            addIncomeButton()
+            if (HomeState.addIncomePopUp){
+                addIncomePopUp()
+            } else {
+                addDailyLimitButton()
+                addExpenseButton()
+                addIncomeButton()
+            }
         }
     }
 
@@ -216,6 +264,19 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @Composable
+    fun addIncomePopUp () {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clickable(onClick = { /* Close pop-up */ }),
+            contentAlignment = Alignment.Center
+        ) {
+            Card {
+                Text("This is a custom pop-up.")
+            }
+        }
+    }
 
 
 
